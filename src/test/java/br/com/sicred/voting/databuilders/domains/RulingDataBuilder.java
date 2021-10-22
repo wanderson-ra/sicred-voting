@@ -2,7 +2,6 @@ package br.com.sicred.voting.databuilders.domains;
 
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 
@@ -27,8 +26,7 @@ public class RulingDataBuilder extends DataBuilderBase<Ruling> {
 	}
 
 	public RulingDataBuilder toCreate() {
-		setField(this.ruling, "id", null);
-		setField(this.ruling, "votes", Arrays.asList());
+		setField(this.ruling, "id", null);	;
 		setField(this.ruling, "createdAt", null);
 		setField(this.ruling, "lastUpdate", null);
 		
