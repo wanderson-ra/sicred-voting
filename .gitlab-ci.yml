@@ -1,0 +1,71 @@
+variables:
+  MAVEN_CLI_OPTS: "-s settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache: 
+  paths:
+    - .m2/repository/
+    - target/
+
+stages:
+  - build
+  - test
+  - analysis
+  - deploy
+  
+
+maven-build:
+  image: maven:3-jdk-11
+  stage: build
+  script: "mvn $MAVEN_CLI_OPTS package -B"  
+
+maven-test:
+  image: maven:3-jdk-11
+  stage: test 
+
+  cache:
+    key: m_m2
+    policy: pull
+    paths:
+      - .m2/repository/
+
+  script: "mvn clean install -P tests $MAVEN_CLI_OPTS package -B"
+
+  artifacts:
+    when: on_success
+    paths:
+      - target/failsafe-reports
+      - target/surefire-reports
+      - target/classes
+      - target/test-classes
+      - target/site
+      - target/*.exec
+  coverage: '/Code coverage: \d+\.\d+/'
+
+analysis:
+  stage: analysis
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: ['']
+  variables:    
+    GIT_DEPTH: 0
+    SONAR_PROJECT_BASE_DIR: ./
+  script:
+    - pwd
+    - ls -l
+    - sonar-scanner -Dsonar.qualitygate.wait=true 
+  only:
+    - master
+    - main
+
+deploy:
+  stage: deploy
+  image: ruby:latest
+  script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl  
+  - dpl --provider=heroku --app=$APP_NAME --api-key=$HEROKU_API_KEY --skip-cleanup
+
+  only:
+  - main
