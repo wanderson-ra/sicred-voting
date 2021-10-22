@@ -1,9 +1,11 @@
 package br.com.sicred.voting.gateways.database.ruling;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doThrow;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,22 +17,23 @@ import org.mockito.internal.verification.VerificationModeFactory;
 import br.com.sicred.voting.domains.Ruling;
 import br.com.sicred.voting.gateways.database.ruling.mongo.db.RulingDatabaseGatewayImpl;
 import br.com.sicred.voting.gateways.database.ruling.mongo.db.repository.RulingRepository;
+import br.com.sicred.voting.gateways.exceptions.CreateRulingDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
 
 public class RulingDatabaseGatewayImplUniTest extends BaseTest {
-	
+
 	@InjectMocks
-	private RulingDatabaseGatewayImpl rulingDatabaseGatewayImpl;	
-	
+	private RulingDatabaseGatewayImpl rulingDatabaseGatewayImpl;
+
 	@Mock
 	private RulingRepository rulingRepository;
-	
+
 	@Test
 	@DisplayName("shoul create ruling success")
 	public void shoulBySuccess() {
-	
+
 		final Ruling rulingToCreated = this.domainsDatabuilder.getRulingDataBuilder().toCreate().build();
-		
+
 		final Ruling rulingCreated = this.domainsDatabuilder.getRulingDataBuilder().build();
 
 		when(this.rulingRepository.save(any(Ruling.class))).thenReturn(rulingCreated);
@@ -41,11 +44,28 @@ public class RulingDatabaseGatewayImplUniTest extends BaseTest {
 
 		verify(this.rulingRepository, VerificationModeFactory.times(1)).save(rulingCaptor.capture());
 
-		final Ruling rulingCaptured = rulingCaptor.getValue();		
-		
+		final Ruling rulingCaptured = rulingCaptor.getValue();
+
 		this.assertRulingCaptured(rulingToCreated, rulingCaptured);
-		
+
 		this.assertRulingResponse(rulingCreated, response);
+
+	}
+
+	@Test
+	@DisplayName("shoul create ruling error database")
+	public void shoulByErrorDatabase() {
+
+		final Ruling rulingToCreated = this.domainsDatabuilder.getRulingDataBuilder().toCreate().build();
+
+		doThrow(new RuntimeException()).when(this.rulingRepository).save(any(Ruling.class));
+
+		final CreateRulingDatabaseException error = assertThrows(CreateRulingDatabaseException.class, () -> {
+			this.rulingDatabaseGatewayImpl.create(rulingToCreated);
+		});
+
+		assertEquals(error.getCode(), "sicred.ruling.database.error.create");
+		assertEquals(error.getMessage(), "Error to create Ruling.");
 
 	}
 

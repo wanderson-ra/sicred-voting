@@ -1,13 +1,14 @@
 package br.com.sicred.voting.gateways.http.controllers.ruling.json;
 
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
+
 @Getter
+@Builder
 @ToString
-@AllArgsConstructor(staticName = "factory")
 public class CreateRulingResponseJson {
 
 	private String id;

@@ -1,4 +1,4 @@
-package br.com.sicred.voting.gateways.http.controllers.ruling;
+package br.com.sicred.voting.gateways.http.controllers.associate;
 
 import javax.validation.Valid;
 
@@ -13,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sicred.voting.domains.Ruling;
-import br.com.sicred.voting.gateways.http.controllers.ruling.json.CreateRulingRequestJson;
+import br.com.sicred.voting.domains.Associate;
+import br.com.sicred.voting.gateways.http.controllers.associate.json.CreateAssociateRequestJson;
+import br.com.sicred.voting.gateways.http.controllers.associate.json.CreateAssociateResponseJson;
 import br.com.sicred.voting.gateways.http.controllers.ruling.json.CreateRulingResponseJson;
-import br.com.sicred.voting.usecases.CreateRulingUseCase;
+import br.com.sicred.voting.usecases.CreateAssociateUseCase;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -25,18 +26,17 @@ import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("${baseurl.v1}/rulings")
-@Api(tags = "Ruling", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping("${baseurl.v1}/associates")
+@Api(tags = "Associate", produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
-@Validated
-public class RulingController {
+public class AssociateController {
 
 	@Autowired
-	private CreateRulingUseCase createRulingUseCase;
+	private CreateAssociateUseCase createAssociateUseCase;
 	
 	
 
-	@ApiOperation(value = "Resource to Create Ruling", response = CreateRulingResponseJson.class)
+	@ApiOperation(value = "Resource to Create Associate", response = CreateRulingResponseJson.class)
 	@ApiResponses(value = { @ApiResponse(code = 201, message = "CREATED"),
 			@ApiResponse(code = 400, message = "Bad Request"), @ApiResponse(code = 401, message = "Unauthorized"),
 			@ApiResponse(code = 422, message = "Unprocessable Entity"),
@@ -44,17 +44,18 @@ public class RulingController {
 	@Validated
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public CreateRulingResponseJson create(
-			final @RequestBody(required = true) @Valid CreateRulingRequestJson createRulingRequestJson) {
-		log.info("createRulingRequestJson: {}", createRulingRequestJson);
+	public CreateAssociateResponseJson create(
+			final @RequestBody(required = true) @Valid CreateAssociateRequestJson createAssociateRequestJson) {
+		log.info("createAssociateRequestJson: {}", createAssociateRequestJson);
 
-		final Ruling rulingToCreate = Ruling.builder()
-				.name(createRulingRequestJson.getName())
-				.description(createRulingRequestJson.getDescription()).build();
+		final Associate associateToCreate = Associate.builder()
+				.name(createAssociateRequestJson.getName())
+				.cpf(createAssociateRequestJson.getCpf())
+				.build();
 
-		final Ruling rulingCreated = this.createRulingUseCase.create(rulingToCreate);
+		final Associate associateCreated = this.createAssociateUseCase.create(associateToCreate);
 
-		return CreateRulingResponseJson.builder().id(rulingCreated.getId()).build();
+		return CreateAssociateResponseJson.builder().id(associateCreated.getId()).build();
 
 	}
 
