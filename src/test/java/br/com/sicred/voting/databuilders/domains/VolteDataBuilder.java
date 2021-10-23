@@ -17,7 +17,7 @@ public class VolteDataBuilder extends DataBuilderBase<Vote> {
 				.id(this.faker.internet().uuid())
 				.voteType(VoteType.YES)
 				.associate(new AssociateDataBuilder().build())
-				.ruling(new RulingDataBuilder().build())
+				.votingSession(new VotingSessionDataBuilder().build())
 				.createdAt(Utils.convertToLocalDateTime(this.faker.date().past(1, TimeUnit.DAYS)))
 				.build();
 	}

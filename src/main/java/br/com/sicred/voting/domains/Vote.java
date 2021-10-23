@@ -32,7 +32,7 @@ public class Vote {
 	
 	@NonNull
 	@DBRef
-	private Ruling ruling;
+	private VotingSession votingSession;
 
 	@CreatedDate
 	private LocalDateTime createdAt;	

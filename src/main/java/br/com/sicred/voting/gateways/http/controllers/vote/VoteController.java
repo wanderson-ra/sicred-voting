@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sicred.voting.domains.Associate;
-import br.com.sicred.voting.domains.Ruling;
 import br.com.sicred.voting.domains.Vote;
+import br.com.sicred.voting.domains.VotingSession;
 import br.com.sicred.voting.gateways.http.controllers.vote.json.CreateVoteRequestJson;
 import br.com.sicred.voting.gateways.http.controllers.vote.json.CreateVoteResponseJson;
 import br.com.sicred.voting.usecases.CreateVoteUseCaseOrquestrator;
@@ -54,7 +54,6 @@ public class VoteController {
 		final Vote voteCreated = this.createVoteUseCaseOrquestrator.create(voteToCreate);
 		
 		return CreateVoteResponseJson.builder().id(voteCreated.getId()).build();
-
 	}
 
 
@@ -64,13 +63,14 @@ public class VoteController {
 				.id(createVoteRequestJson.getAssociateId())
 				.build();
 		
-		final Ruling ruling = Ruling.builder()
-				.id(createVoteRequestJson.getRulingId())
+		final VotingSession votingSession = VotingSession.builder()
+				.id(createVoteRequestJson.getVotingSessionId())
 				.build();
 		
 		
 		final Vote voteToCreate = Vote.builder()
-				.associate(associate).ruling(ruling)
+				.associate(associate)
+				.votingSession(votingSession)
 				.voteType(createVoteRequestJson.getVoteType())
 				.build();
 		

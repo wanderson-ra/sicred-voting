@@ -32,7 +32,7 @@ public class VoteControllerUnitTest extends BaseTest {
 	public void shouldBySuccess() {
 		
 		final CreateVoteRequestJson createVoteRequestJson = CreateVoteRequestJson.builder()
-				.rulingId(this.faker.internet().uuid())
+				.votingSessionId(this.faker.internet().uuid())
 				.associateId(this.faker.internet().uuid())
 				.voteType(VoteType.NO)
 				.build();
@@ -52,7 +52,7 @@ public class VoteControllerUnitTest extends BaseTest {
 		assertEquals(voteCreated.getId(), response.getId());
 				
 		assertEquals(createVoteRequestJson.getAssociateId(), voteCaptured.getAssociate().getId());
-		assertEquals(createVoteRequestJson.getRulingId(), voteCaptured.getRuling().getId());
+		assertEquals(createVoteRequestJson.getVotingSessionId(), voteCaptured.getVotingSession().getId());
 		assertEquals(createVoteRequestJson.getVoteType(), voteCaptured.getVoteType());
 		assertEquals(null, voteCaptured.getId());
 		assertEquals(null, voteCaptured.getCreatedAt());		

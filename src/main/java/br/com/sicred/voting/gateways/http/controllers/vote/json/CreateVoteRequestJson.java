@@ -20,7 +20,7 @@ public class CreateVoteRequestJson {
 	@NotEmpty(message = "Field associateId is required.")
 	private String associateId;
 
-	@NotEmpty(message = "Field rulingId is required.")
-	private String rulingId;
+	@NotEmpty(message = "Field votingSessionId is required.")
+	private String votingSessionId;
 
 }
