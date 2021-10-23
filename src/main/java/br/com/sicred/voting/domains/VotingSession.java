@@ -27,9 +27,8 @@ public class VotingSession {
 	@DBRef
 	private Ruling ruling;
 
-	@NonNull
-	@Builder.Default
-	private LocalDateTime expiration = LocalDateTime.now().plusMinutes(1);
+	@NonNull	
+	private LocalDateTime expiration;
 
 	@CreatedDate
 	private LocalDateTime createdAt;

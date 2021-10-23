@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-@AllArgsConstructor()
+@AllArgsConstructor
 public class CreateVoteRequestJson {
 
 	@NotEmpty(message = "Field voteType is required.")
