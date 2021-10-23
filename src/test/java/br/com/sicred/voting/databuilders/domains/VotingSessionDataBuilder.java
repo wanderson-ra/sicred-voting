@@ -3,6 +3,7 @@ package br.com.sicred.voting.databuilders.domains;
 
 import static org.springframework.test.util.ReflectionTestUtils.setField;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import br.com.sicred.voting.databuilders.DataBuilderBase;
@@ -23,9 +24,8 @@ public class VotingSessionDataBuilder extends DataBuilderBase<VotingSession> {
 				.lastUpdate(Utils.convertToLocalDateTime(this.faker.date().past(1, TimeUnit.DAYS)))
 				.build();				
 	}	
-	
-	public VotingSessionDataBuilder setIsOpen(final Boolean isOpen) {
-		setField(this.votingSession, "isOpen", isOpen);
+	public VotingSessionDataBuilder setExpiration(final LocalDateTime localDateTime) {
+		setField(this.votingSession, "expiration", localDateTime);
 				
 		return this;
 	}

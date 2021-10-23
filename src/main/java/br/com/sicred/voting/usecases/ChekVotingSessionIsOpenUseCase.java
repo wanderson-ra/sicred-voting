@@ -1,5 +1,7 @@
 package br.com.sicred.voting.usecases;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,13 @@ public class ChekVotingSessionIsOpenUseCase {
 		log.info("votingSessionId: {}", votingSessionId);
 
 		final VotingSession votingSession = this.findVotingSessionByIdUseCase.find(votingSessionId);
-
-		if (!votingSession.getIsOpen()) {
+		
+		final LocalDateTime localDateTimeNow = LocalDateTime.now();
+		
+		if(votingSession.getExpiration().isBefore(localDateTimeNow)) {
 			log.warn("voting session is closed: {}", votingSession);
 			throw new VotingSessionIsClosedException();
-		}
+		}		
 	}
 
 }
