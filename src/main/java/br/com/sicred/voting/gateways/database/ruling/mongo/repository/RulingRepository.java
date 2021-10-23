@@ -1,4 +1,4 @@
-package br.com.sicred.voting.gateways.database.ruling.mongo.db.repository;
+package br.com.sicred.voting.gateways.database.ruling.mongo.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

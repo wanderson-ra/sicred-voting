@@ -15,8 +15,8 @@ import org.mockito.Mock;
 import org.mockito.internal.verification.VerificationModeFactory;
 
 import br.com.sicred.voting.domains.Ruling;
-import br.com.sicred.voting.gateways.database.ruling.mongo.db.RulingDatabaseGatewayImpl;
-import br.com.sicred.voting.gateways.database.ruling.mongo.db.repository.RulingRepository;
+import br.com.sicred.voting.gateways.database.ruling.mongo.RulingDatabaseGatewayImpl;
+import br.com.sicred.voting.gateways.database.ruling.mongo.repository.RulingRepository;
 import br.com.sicred.voting.gateways.exceptions.CreateRulingDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
 
