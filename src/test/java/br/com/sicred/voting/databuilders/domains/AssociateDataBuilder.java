@@ -1,6 +1,8 @@
 package br.com.sicred.voting.databuilders.domains;
 
 
+import static org.springframework.test.util.ReflectionTestUtils.setField;
+
 import java.util.concurrent.TimeUnit;
 
 import br.com.sicred.voting.databuilders.DataBuilderBase;
@@ -20,6 +22,14 @@ public class AssociateDataBuilder extends DataBuilderBase<Associate> {
 				.createdAt(Utils.convertToLocalDateTime(this.faker.date().past(2, TimeUnit.DAYS)))
 				.lastUpdate(Utils.convertToLocalDateTime(this.faker.date().past(2, TimeUnit.DAYS)))
 				.build();
+	}
+	
+	public AssociateDataBuilder toCreate() {
+		setField(this.associate, "id", null);	;
+		setField(this.associate, "createdAt", null);
+		setField(this.associate, "lastUpdate", null);
+		
+		return this;
 	}
 
 	public Associate build() {
