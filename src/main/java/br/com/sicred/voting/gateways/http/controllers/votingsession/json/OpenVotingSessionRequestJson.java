@@ -7,12 +7,14 @@ import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@ToString
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class OpenVotingSessionRequestJson {
 	
 	@NotEmpty(message = "Field rulingId is required.")

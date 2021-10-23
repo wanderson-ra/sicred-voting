@@ -9,8 +9,8 @@ import br.com.sicred.voting.domains.VotingSession;
 import br.com.sicred.voting.gateways.database.votingsession.VotingSessionDatabaseGateway;
 import br.com.sicred.voting.gateways.database.votingsession.mongo.repository.VotingSessionRepository;
 import br.com.sicred.voting.gateways.exceptions.FindByIdDatabaseException;
+import br.com.sicred.voting.gateways.exceptions.OpenVotingSessionDatabaseException;
 import lombok.extern.slf4j.Slf4j;
-
 
 @Component
 @Slf4j
@@ -21,14 +21,26 @@ public class VotingSessionDatabaseGatewayImpl implements VotingSessionDatabaseGa
 
 	public Optional<VotingSession> findById(final String id) {
 		log.info("id: {}", id);
-		
+
 		try {
 			return this.votingSessionRepository.findById(id);
-			
+
 		} catch (Exception error) {
 			log.error("error: {}", error);
-			throw new FindByIdDatabaseException();			
-		}		
+			throw new FindByIdDatabaseException();
+		}
+	}
+
+	@Override
+	public VotingSession open(final VotingSession votingSession) {
+		log.info("votingSession: {}", votingSession);
+		try {
+			return this.votingSessionRepository.save(votingSession);
+
+		} catch (Exception error) {
+			log.error("error: {}", error);
+			throw new OpenVotingSessionDatabaseException();
+		}
 	}
 
 }

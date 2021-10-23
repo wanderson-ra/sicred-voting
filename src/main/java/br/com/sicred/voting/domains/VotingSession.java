@@ -26,7 +26,7 @@ public class VotingSession {
 	@NonNull
 	@DBRef
 	private Ruling ruling;
-
+	
 	@NonNull	
 	private LocalDateTime expiration;
 

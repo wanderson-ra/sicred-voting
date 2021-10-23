@@ -9,10 +9,6 @@
 	<name>Sicred Voting</name>
 	<description>Management Sicred Voting</description>
 
-	<properties>
-		<spring-cloud.version>2020.0.2</spring-cloud.version>
-	</properties>
-
 
 	<dependencyManagement>
 		<dependencies>
@@ -22,23 +18,12 @@
 				<version>2.4.5</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
+			</dependency>			
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- APPLICATION - START -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
+		<!-- APPLICATION - START -->		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,13 +56,7 @@
 			<groupId>com.bol</groupId>
 			<artifactId>spring-data-mongodb-encrypt</artifactId>
 			<version>2.4.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.modelmapper</groupId>
-			<artifactId>modelmapper</artifactId>
-			<version>2.4.4</version>
-		</dependency>
+		</dependency>	
 
 		<!-- APPLICATION - END -->
 
@@ -127,6 +106,7 @@
 		<dependency>
 			<groupId>com.github.tomakehurst</groupId>
 			<artifactId>wiremock-jre8</artifactId>
+			<version>2.27.2</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- TEST - END -->

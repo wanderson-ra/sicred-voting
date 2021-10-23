@@ -7,4 +7,5 @@ import br.com.sicred.voting.domains.VotingSession;
 public interface VotingSessionDatabaseGateway {
 
 	Optional<VotingSession> findById(final String id);
+	VotingSession open(final VotingSession votingSession);
 }

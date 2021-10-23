@@ -14,22 +14,5 @@ mongodb.encrypt:
       key: hqHKBLV83LpCqzKpf8OvutbCs+O5wX5BPu3btWpEvXA=
 
 baseurl:
-      v1: sicred/voting/v1
-
-  
-eureka:
-   server:
-      enableSelfPreservation: false
-   instance:
-       leaseRenewalIntervalInSeconds: 1
-       leaseExpirationDurationInSeconds: 2
-       instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${server.port}
-   client:
-    register-with-eureka: true
-    fetch-registry: true
-    lease:
-      duration: 5
-    healthcheck:
-      enabled: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/  
+      v1: sicred/voting/v1  
+ 

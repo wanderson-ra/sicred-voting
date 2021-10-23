@@ -6,12 +6,14 @@ import br.com.sicred.voting.domains.enums.VoteType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@ToString
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class CreateVoteRequestJson {
 
 	@NotEmpty(message = "Field voteType is required.")

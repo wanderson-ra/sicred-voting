@@ -6,12 +6,14 @@ import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
-@ToString
 @Builder
-@AllArgsConstructor()
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class CreateRulingRequestJson {
 
 	@NotEmpty(message = "Field name is required.")

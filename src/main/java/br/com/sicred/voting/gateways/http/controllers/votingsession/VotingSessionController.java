@@ -63,8 +63,8 @@ public class VotingSessionController {
 				.id(openVotingSessionRequestJson.getRulingId())
 				.build();			
 		
-		final VotingSession votingSessionToOpen = VotingSession.builder()			
-					.expiration(openVotingSessionRequestJson.getExpiration())
+		VotingSession votingSessionToOpen = VotingSession.builder()			
+					.expiration(openVotingSessionRequestJson.getExpiration())					
 					.ruling(ruling)
 					.build();		
 		
