@@ -25,7 +25,7 @@ public class CreateAssociateUseCaseUnitTest extends BaseTest {
 	private AssociateDatebaseGateway associateDatebaseGateway;
 	
 	@Test
-	@DisplayName("shoul create associate success")
+	@DisplayName("should by create associate with success")
 	public void shouldBySuccess() {
 		
 		final Associate associateToCreate = this.domainsDatabuilder.getAssociateDataBuilder().toCreate().build();

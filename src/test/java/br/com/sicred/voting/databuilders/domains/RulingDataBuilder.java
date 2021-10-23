@@ -26,7 +26,7 @@ public class RulingDataBuilder extends DataBuilderBase<Ruling> {
 	}
 
 	public RulingDataBuilder toCreate() {
-		setField(this.ruling, "id", null);	;
+		setField(this.ruling, "id", null);
 		setField(this.ruling, "createdAt", null);
 		setField(this.ruling, "lastUpdate", null);
 		

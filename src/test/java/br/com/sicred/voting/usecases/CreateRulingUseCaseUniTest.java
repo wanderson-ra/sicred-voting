@@ -25,7 +25,7 @@ public class CreateRulingUseCaseUniTest extends BaseTest{
 	private RulingDatabaseGateway rulingDatabaseGateway;
 	
 	@Test
-	@DisplayName("shoul create ruling success")
+	@DisplayName("should create ruling with success")
 	public void shoulBySuccess() {
 	
 		final Ruling rulingToCreated = this.domainsDatabuilder.getRulingDataBuilder().toCreate().build();

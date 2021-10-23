@@ -6,7 +6,7 @@ import br.com.sicred.voting.config.interceptors.controllers.SicredVotingBaseExce
 
 public class CreateAssociateDatabaseException extends SicredVotingBaseException {
 
-	private static final long serialVersionUID = 8406603321967944173L;
+	private static final long serialVersionUID = -3467779414838011548L;
 
 	@Override
 	public String getCode() {

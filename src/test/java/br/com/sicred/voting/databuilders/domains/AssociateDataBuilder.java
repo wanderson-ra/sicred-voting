@@ -25,7 +25,7 @@ public class AssociateDataBuilder extends DataBuilderBase<Associate> {
 	}
 	
 	public AssociateDataBuilder toCreate() {
-		setField(this.associate, "id", null);	;
+		setField(this.associate, "id", null);
 		setField(this.associate, "createdAt", null);
 		setField(this.associate, "lastUpdate", null);
 		

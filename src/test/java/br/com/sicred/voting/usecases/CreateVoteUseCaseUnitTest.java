@@ -1,5 +1,10 @@
 package br.com.sicred.voting.usecases;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -7,49 +12,33 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.internal.verification.VerificationModeFactory;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import br.com.sicred.voting.domains.Vote;
+import br.com.sicred.voting.gateways.database.vote.VoteDatabaseGateway;
 import br.com.sicred.voting.utils.BaseTest;
 
-public class CreateVoteUseCaseOrquestratorUnitTest extends BaseTest {
-
+public class CreateVoteUseCaseUnitTest extends BaseTest {
+	
 	@InjectMocks
-	private CreateVoteUseCaseOrquestrator createVoteUseCaseOrquestrator;
-
-	@Mock
-	private ChekVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;
-
-	@Mock
-	private CheckAssociateAlreadyVotedUseCase checkAssociateAlreadyVotedUseCase;
-
-	@Mock
 	private CreateVoteUseCase createVoteUseCase;
-
+	
+	@Mock
+	private VoteDatabaseGateway voteDatabaseGateway;
+	
 	@Test
-	@DisplayName("should by create vote with success")
+	@DisplayName("should by create vote success")
 	public void shouldBySuccess() {
 
 		final Vote voteToCreate = this.domainsDatabuilder.getVolteDataBuilder().toCreate().build();
 
 		final Vote voteCreated = this.domainsDatabuilder.getVolteDataBuilder().toCreate().build();
 
-		when(this.createVoteUseCase.create(any(Vote.class))).thenReturn(voteCreated);
+		when(this.voteDatabaseGateway.create(any(Vote.class))).thenReturn(voteCreated);
 
-		final Vote response = this.createVoteUseCaseOrquestrator.create(voteToCreate);
-
-		verify(this.checkAssociateAlreadyVotedUseCase, VerificationModeFactory.times(1))
-				.check(voteToCreate.getVotingSession().getId(), voteToCreate.getAssociate().getId());
-
-		verify(this.chekVotingSessionIsOpenUseCase, VerificationModeFactory.times(1))
-				.check(voteToCreate.getVotingSession().getId());
+		final Vote response = this.createVoteUseCase.create(voteToCreate);
 		
 		final ArgumentCaptor<Vote> voteCaptor = ArgumentCaptor.forClass(Vote.class);
 		
-		verify(this.createVoteUseCase, VerificationModeFactory.times(1)).create(voteCaptor.capture());
+		verify(this.voteDatabaseGateway, VerificationModeFactory.times(1)).create(voteCaptor.capture());
 		
 		final Vote voteCaptured = voteCaptor.getValue();
 		
@@ -73,4 +62,5 @@ public class CreateVoteUseCaseOrquestratorUnitTest extends BaseTest {
 		assertEquals(null, voteCaptured.getId());
 		assertEquals(null, voteCaptured.getCreatedAt());
 	}
+
 }
