@@ -1,4 +1,4 @@
-package br.com.sicred.voting.interceptors.base;
+package br.com.sicred.voting.config.interceptors.controllers;
 
 import org.springframework.http.HttpStatus;
 

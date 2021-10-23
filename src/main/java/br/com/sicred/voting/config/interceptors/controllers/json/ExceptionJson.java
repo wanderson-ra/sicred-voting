@@ -1,6 +1,6 @@
-package br.com.sicred.voting.interceptors.base.controller.json;
+package br.com.sicred.voting.config.interceptors.controllers.json;
 
-import br.com.sicred.voting.interceptors.base.SicredVotingBaseException;
+import br.com.sicred.voting.config.interceptors.controllers.SicredVotingBaseException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

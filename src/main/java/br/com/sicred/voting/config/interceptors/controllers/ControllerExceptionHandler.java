@@ -1,4 +1,4 @@
-package br.com.sicred.voting.interceptors.base.controller;
+package br.com.sicred.voting.config.interceptors.controllers;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-import br.com.sicred.voting.interceptors.base.SicredVotingBaseException;
-import br.com.sicred.voting.interceptors.base.controller.json.ExceptionJson;
+import br.com.sicred.voting.config.interceptors.controllers.json.ExceptionJson;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.regex.Matcher;

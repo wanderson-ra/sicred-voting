@@ -2,7 +2,7 @@ package br.com.sicred.voting.gateways.exceptions;
 
 import org.springframework.http.HttpStatus;
 
-import br.com.sicred.voting.interceptors.base.SicredVotingBaseException;
+import br.com.sicred.voting.config.interceptors.controllers.SicredVotingBaseException;
 
 public class CreateRulingDatabaseException extends SicredVotingBaseException {
 

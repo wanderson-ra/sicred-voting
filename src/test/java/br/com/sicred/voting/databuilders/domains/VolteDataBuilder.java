@@ -1,5 +1,7 @@
 package br.com.sicred.voting.databuilders.domains;
 
+import static org.springframework.test.util.ReflectionTestUtils.setField;
+
 import java.util.concurrent.TimeUnit;
 
 import br.com.sicred.voting.databuilders.DataBuilderBase;
@@ -20,6 +22,13 @@ public class VolteDataBuilder extends DataBuilderBase<Vote> {
 				.votingSession(new VotingSessionDataBuilder().build())
 				.createdAt(Utils.convertToLocalDateTime(this.faker.date().past(1, TimeUnit.DAYS)))
 				.build();
+	}
+	
+	public VolteDataBuilder toCreate() {
+		setField(this.vote, "id", null);	;
+		setField(this.vote, "createdAt", null);	
+		
+		return this;
 	}
 
 	public Vote build() {

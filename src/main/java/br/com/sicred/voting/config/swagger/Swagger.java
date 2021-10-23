@@ -1,4 +1,4 @@
-package br.com.sicred.voting.config;
+package br.com.sicred.voting.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

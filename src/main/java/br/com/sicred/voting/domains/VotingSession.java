@@ -29,6 +29,10 @@ public class VotingSession {
 	
 	@NonNull
 	private LocalDateTime expiration;
+	
+	@NonNull
+	@Builder.Default
+	private Boolean isOpen = true;
 
 	@CreatedDate
 	private LocalDateTime createdAt;
