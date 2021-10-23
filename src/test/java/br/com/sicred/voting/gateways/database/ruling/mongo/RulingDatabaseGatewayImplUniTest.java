@@ -1,4 +1,4 @@
-package br.com.sicred.voting.gateways.database.ruling;
+package br.com.sicred.voting.gateways.database.ruling.mongo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.internal.verification.VerificationModeFactory;
 
 import br.com.sicred.voting.domains.Ruling;
-import br.com.sicred.voting.gateways.database.ruling.mongo.RulingDatabaseGatewayImpl;
 import br.com.sicred.voting.gateways.database.ruling.mongo.repository.RulingRepository;
 import br.com.sicred.voting.gateways.exceptions.CreateRulingDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;

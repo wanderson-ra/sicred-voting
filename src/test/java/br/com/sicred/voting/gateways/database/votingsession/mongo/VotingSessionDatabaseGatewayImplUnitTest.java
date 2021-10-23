@@ -1,4 +1,4 @@
-package br.com.sicred.voting.gateways.database.votingsession;
+package br.com.sicred.voting.gateways.database.votingsession.mongo;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Mockito.doThrow;
 
 import br.com.sicred.voting.domains.VotingSession;
-import br.com.sicred.voting.gateways.database.votingsession.mongo.VotingSessionDatabaseGatewayImpl;
 import br.com.sicred.voting.gateways.database.votingsession.mongo.repository.VotingSessionRepository;
 import br.com.sicred.voting.gateways.exceptions.FindByIdDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;

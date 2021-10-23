@@ -1,4 +1,4 @@
-package br.com.sicred.voting.gateways.database.associate;
+package br.com.sicred.voting.gateways.database.associate.mongo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.internal.verification.VerificationModeFactory;
 
 import br.com.sicred.voting.domains.Associate;
-import br.com.sicred.voting.gateways.database.associate.mongo.AssociateDatebaseGatewayImpl;
 import br.com.sicred.voting.gateways.database.associate.mongo.repository.AssociateRespository;
 import br.com.sicred.voting.gateways.exceptions.CreateAssociateDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
