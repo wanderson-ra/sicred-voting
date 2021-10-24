@@ -13,6 +13,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.doThrow;
@@ -20,6 +21,7 @@ import static org.mockito.Mockito.doThrow;
 import br.com.sicred.voting.domains.Vote;
 import br.com.sicred.voting.gateways.database.vote.mongo.repository.VoteRepository;
 import br.com.sicred.voting.gateways.exceptions.CreateVoteDatabaseException;
+import br.com.sicred.voting.gateways.exceptions.FindAllVotesByVotingSessionDatabaseException;
 import br.com.sicred.voting.gateways.exceptions.FindVoteBySessionIdAndAssciateIdAssociateDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
 
@@ -108,6 +110,41 @@ public class VoteDatabaseGatewayImplUniTest extends BaseTest {
 
 		assertEquals(error.getCode(), "sicred.vote.database.error.findbysessionid");
 		assertEquals(error.getMessage(), "Error to find Vote.");
+	}
+
+	@Test
+	@DisplayName("Should by find all by voting session id success")
+	public void shouldByFindAllByVotingSessionIdSuccess() {
+		final String votingSessionId = this.faker.internet().uuid();
+
+		final List<Vote> votes = this.domainsDatabuilder.getVolteDataBuilder().buildList(10);
+
+		when(this.voteRepository.findAllByVotingSessionId(votingSessionId)).thenReturn(votes);
+
+		final List<Vote> votesResponse = this.voteDatabaseGatewayImpl.findAllByVotingSessionId(votingSessionId);
+
+		assertEquals(votes.get(0).getAssociate().getId(), votesResponse.get(0).getAssociate().getId());
+		assertEquals(votes.get(0).getCreatedAt(), votesResponse.get(0).getCreatedAt());
+		assertEquals(votes.get(0).getId(), votesResponse.get(0).getId());
+		assertEquals(votes.get(0).getVoteType(), votesResponse.get(0).getVoteType());
+		assertEquals(votes.get(0).getVotingSession().getId(), votesResponse.get(0).getVotingSession().getId());
+	}
+
+	@Test
+	@DisplayName("Should by find all by voting session id error database")
+	public void shouldByFindAllByVotingSessionIdErrorDatabase() {
+		final String votingSessionId = this.faker.internet().uuid();
+
+		doThrow(new RuntimeException()).when(this.voteRepository).findAllByVotingSessionId(votingSessionId);
+
+		final FindAllVotesByVotingSessionDatabaseException error = assertThrows(
+				FindAllVotesByVotingSessionDatabaseException.class, () -> {
+					this.voteDatabaseGatewayImpl.findAllByVotingSessionId(votingSessionId);
+				});
+
+		assertEquals(error.getCode(), "sicred.vote.database.error.findallbyvotingsession");
+		assertEquals(error.getMessage(), "Error to find all by voting session.");
+
 	}
 
 	private void assertCreateCaptured(final Vote voteToCreate, final Vote voteCaptured) {

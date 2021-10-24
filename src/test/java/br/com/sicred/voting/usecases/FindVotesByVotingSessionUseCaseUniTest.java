@@ -17,7 +17,7 @@ import br.com.sicred.voting.utils.BaseTest;
 public class FindVotesByVotingSessionUseCaseUniTest extends BaseTest {
 	
 	@InjectMocks
-	private FindVotesByVotingSessionUseCase FindVotesByVotingSessionUseCase;
+	private FindVotesByVotingSessionUseCase findVotesByVotingSessionUseCase;
 	
 	@Mock
 	private VoteDatabaseGateway voteDatabaseGateway;
@@ -32,7 +32,7 @@ public class FindVotesByVotingSessionUseCaseUniTest extends BaseTest {
 		
 		when(this.voteDatabaseGateway.findAllByVotingSessionId(votingSessionId)).thenReturn(votes);		
 		
-		final List<Vote> votesResponse = this.FindVotesByVotingSessionUseCase.find(votingSessionId);
+		final List<Vote> votesResponse = this.findVotesByVotingSessionUseCase.find(votingSessionId);
 		
 		assertEquals(votes.get(0).getAssociate().getId(), votesResponse.get(0).getAssociate().getId());
 		assertEquals(votes.get(0).getCreatedAt(), votesResponse.get(0).getCreatedAt());
