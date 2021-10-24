@@ -4,13 +4,13 @@ import org.springframework.http.HttpStatus;
 
 import br.com.sicred.voting.config.interceptors.controllers.SicredVotingBaseException;
 
-public class FindByIdDatabaseException extends SicredVotingBaseException {
+public class FindAssociateByCpfDatabaseException extends SicredVotingBaseException {
 
-	private static final long serialVersionUID = 3054556991197432725L;
+	private static final long serialVersionUID = -3467779414838011548L;
 
 	@Override
 	public String getCode() {
-		return "sicred.votingsession.database.error.findbyid";
+		return "sicred.associate.database.error.findbycpf";
 	}
 
 	@Override
@@ -20,6 +20,7 @@ public class FindByIdDatabaseException extends SicredVotingBaseException {
 
 	@Override
 	public String getMessage() {
-		return "Error to find by id.";
+		return "Error to find associate by cpf.";
 	}
+
 }

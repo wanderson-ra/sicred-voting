@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.Optional;
+
 import static org.mockito.Mockito.doThrow;
 
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +20,7 @@ import org.mockito.internal.verification.VerificationModeFactory;
 import br.com.sicred.voting.domains.Associate;
 import br.com.sicred.voting.gateways.database.associate.mongo.repository.AssociateRespository;
 import br.com.sicred.voting.gateways.exceptions.CreateAssociateDatabaseException;
+import br.com.sicred.voting.gateways.exceptions.FindAssociateByCpfDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
 
 public class AssociateDatebaseGatewayImplUnitTest extends BaseTest {
@@ -26,12 +30,10 @@ public class AssociateDatebaseGatewayImplUnitTest extends BaseTest {
 
 	@Mock
 	private AssociateRespository associateRespository;
-	
-	
 
 	@Test
-	@DisplayName("shoul create associate success")
-	public void shoulBySuccess() {
+	@DisplayName("Should by create associate success")
+	public void shouldBySuccess() {
 		final Associate associateToCreate = this.domainsDatabuilder.getAssociateDataBuilder().toCreate().build();
 
 		final Associate associateCreated = this.domainsDatabuilder.getAssociateDataBuilder().build();
@@ -52,8 +54,8 @@ public class AssociateDatebaseGatewayImplUnitTest extends BaseTest {
 	}
 
 	@Test
-	@DisplayName("shoul create associate error database")
-	public void shoulByErrorDatabase() {
+	@DisplayName("Should by create associate error database")
+	public void shouldByErrorDatabase() {
 		final Associate associateToCreate = this.domainsDatabuilder.getAssociateDataBuilder().toCreate().build();
 
 		doThrow(new RuntimeException()).when(this.associateRespository).save(associateToCreate);
@@ -65,6 +67,41 @@ public class AssociateDatebaseGatewayImplUnitTest extends BaseTest {
 		assertEquals(error.getCode(), "sicred.associate.database.error.create");
 		assertEquals(error.getMessage(), "Error to create Associate.");
 
+	}
+
+	@Test
+	@DisplayName("Should by find by cpf success")
+	public void shouldByCpfWithSuccess() {
+
+		final Associate associateFinded = this.domainsDatabuilder.getAssociateDataBuilder().build();
+
+		final String cpf = this.faker.internet().uuid();
+
+		when(this.associateRespository.findByCpf(cpf)).thenReturn(Optional.of(associateFinded));
+
+		final Optional<Associate> associateFindedResponse = this.associateDatebaseGatewayImpl.findByCpf(cpf);
+
+		assertEquals(associateFinded.getCpf(), associateFindedResponse.get().getCpf());
+		assertEquals(associateFinded.getCreatedAt(), associateFindedResponse.get().getCreatedAt());
+		assertEquals(associateFinded.getId(), associateFindedResponse.get().getId());
+		assertEquals(associateFinded.getLastUpdate(), associateFindedResponse.get().getLastUpdate());
+		assertEquals(associateFinded.getName(), associateFindedResponse.get().getName());
+	}
+
+	@Test
+	@DisplayName("Should by find by cpf error database")
+	public void shouldByCpfWithErrorDatabase() {
+
+		final String cpf = this.faker.internet().uuid();
+
+		doThrow(new RuntimeException()).when(this.associateRespository).findByCpf(cpf);
+		
+		final FindAssociateByCpfDatabaseException error = assertThrows(FindAssociateByCpfDatabaseException.class, () -> {
+			this.associateDatebaseGatewayImpl.findByCpf(cpf);
+		});
+
+		assertEquals(error.getCode(), "sicred.associate.database.error.findbycpf");
+		assertEquals(error.getMessage(), "Error to find associate by cpf.");
 	}
 
 	private void assertCaptured(final Associate associateToCreate, final Associate associateCaptured) {

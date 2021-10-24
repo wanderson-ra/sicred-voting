@@ -20,7 +20,7 @@ import static org.mockito.Mockito.verify;
 
 import br.com.sicred.voting.domains.VotingSession;
 import br.com.sicred.voting.gateways.database.votingsession.mongo.repository.VotingSessionRepository;
-import br.com.sicred.voting.gateways.exceptions.FindByIdDatabaseException;
+import br.com.sicred.voting.gateways.exceptions.FindVotingSessionByIdDatabaseException;
 import br.com.sicred.voting.gateways.exceptions.OpenVotingSessionDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
 
@@ -60,7 +60,7 @@ public class VotingSessionDatabaseGatewayImplUnitTest extends BaseTest {
 
 		doThrow(new RuntimeException()).when(this.votingSessionRepository).findById(votingSessionId);
 
-		final FindByIdDatabaseException error = assertThrows(FindByIdDatabaseException.class, () -> {
+		final FindVotingSessionByIdDatabaseException error = assertThrows(FindVotingSessionByIdDatabaseException.class, () -> {
 			this.votingSessionDatabaseGatewayImpl.findById(votingSessionId);
 		});
 
