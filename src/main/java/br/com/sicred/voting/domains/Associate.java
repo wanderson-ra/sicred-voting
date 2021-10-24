@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.mongodb.lang.NonNull;
@@ -26,6 +27,7 @@ public class Associate {
 	private String name;
 
 	@NonNull
+	@Indexed(unique = true)
 	private String cpf;
 
 	@CreatedDate
