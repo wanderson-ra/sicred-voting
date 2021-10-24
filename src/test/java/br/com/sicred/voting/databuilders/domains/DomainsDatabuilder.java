@@ -9,12 +9,14 @@ public class DomainsDatabuilder {
 	private AssociateDataBuilder associateDataBuilder;
 	private VolteDataBuilder volteDataBuilder;
 	private VotingSessionDataBuilder votingSessionDataBuilder;
+	private ResultDataBuilder resultDataBuilder;
 
 	public DomainsDatabuilder() {
 		this.rulingDataBuilder = new RulingDataBuilder();
 		this.associateDataBuilder = new AssociateDataBuilder();
 		this.volteDataBuilder = new VolteDataBuilder();
 		this.votingSessionDataBuilder = new VotingSessionDataBuilder();
+		this.resultDataBuilder = new ResultDataBuilder();
 	}
 
 }
