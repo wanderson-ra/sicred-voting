@@ -37,7 +37,7 @@ public class GetResultVotingSessionUseCase {
 
 		final Integer totalVotesNo = this.getTotalVotes(votesBySession, VoteType.NO);
 		
-		final Integer totalVotesYes = votesBySession.size() - totalVotesNo;
+		final Integer totalVotesYes = this.getTotalVotesYes(votesBySession, totalVotesNo);
 
 		final Winner winner = this.getWinner(totalVotesNo, totalVotesYes);				
 
@@ -45,6 +45,11 @@ public class GetResultVotingSessionUseCase {
 				.yes(totalVotesYes)
 				.no(totalVotesNo)
 				.winner(winner).build();
+	}
+
+	private Integer getTotalVotesYes(final List<Vote> votesBySession, final Integer totalVotesNo) {
+		final Integer totalVotesYes = votesBySession.size() - totalVotesNo;
+		return totalVotesYes;
 	}
 
 	private Winner getWinner(final Integer totalVotesNo, final Integer totalVotesYes) {
@@ -59,7 +64,7 @@ public class GetResultVotingSessionUseCase {
 	}
 
 	private void checkVotingSessionIsStillOpen(final VotingSession votingSessionFinded) {
-		if (!votingSessionFinded.isOpen()) {
+		if (votingSessionFinded.isOpen()) {
 			throw new VotingSessionIsStillOpenException();
 		}
 	}

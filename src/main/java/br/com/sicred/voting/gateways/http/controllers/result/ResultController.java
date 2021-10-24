@@ -40,7 +40,7 @@ public class ResultController {
 			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@Validated
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping("finish/{rulingId}/{votingSessionId}")
+	@GetMapping("finish/{votingSessionId}")
 	public GetResultResponseJson getResult(final @PathVariable(name = "votingSessionId") @NotEmpty String votingSessionId) {
 
 		log.info("votingSessionId: {}", votingSessionId);

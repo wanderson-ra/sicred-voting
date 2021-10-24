@@ -40,7 +40,7 @@ public class GetResultVotingSessionUseCaseUnoTest extends BaseTest {
 		final Integer totalYes = 30;
 		final Integer totalNo = 10;
 
-		final LocalDateTime expiration = LocalDateTime.now().plusDays(1);
+		final LocalDateTime expiration = LocalDateTime.now().minusDays(1);
 
 		final String votingSessionId = faker.internet().uuid();
 
@@ -73,7 +73,7 @@ public class GetResultVotingSessionUseCaseUnoTest extends BaseTest {
 		final Integer totalYes = 7;
 		final Integer totalNo = 10;
 
-		final LocalDateTime expiration = LocalDateTime.now().plusDays(1);
+		final LocalDateTime expiration = LocalDateTime.now().minusDays(1);
 
 		final String votingSessionId = faker.internet().uuid();
 
@@ -106,7 +106,7 @@ public class GetResultVotingSessionUseCaseUnoTest extends BaseTest {
 		final Integer totalYes = 10;
 		final Integer totalNo = 10;
 
-		final LocalDateTime expiration = LocalDateTime.now().plusDays(1);
+		final LocalDateTime expiration = LocalDateTime.now().minusDays(1);
 
 		final String votingSessionId = faker.internet().uuid();
 
@@ -136,7 +136,7 @@ public class GetResultVotingSessionUseCaseUnoTest extends BaseTest {
 	@DisplayName("Should by error voting session open")
 	public void shouldByGetResultErrorSessionOpen() {
 
-		final LocalDateTime expiration = LocalDateTime.now().minusDays(1);
+		final LocalDateTime expiration = LocalDateTime.now().plusDays(1);
 
 		final String votingSessionId = faker.internet().uuid();
 
