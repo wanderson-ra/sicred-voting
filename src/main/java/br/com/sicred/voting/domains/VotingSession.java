@@ -7,6 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.util.ObjectUtils;
 
 import com.mongodb.lang.NonNull;
 
@@ -26,8 +27,8 @@ public class VotingSession {
 	@NonNull
 	@DBRef
 	private Ruling ruling;
-	
-	@NonNull	
+
+	@NonNull
 	private LocalDateTime expiration;
 
 	@CreatedDate
@@ -35,5 +36,15 @@ public class VotingSession {
 
 	@LastModifiedDate
 	private LocalDateTime lastUpdate;
+	
+	public Boolean isOpen() {
+		
+		if (!ObjectUtils.isEmpty(this.expiration)) {
+			final LocalDateTime localDateTimeNow = LocalDateTime.now();
+			return this.expiration.isAfter(localDateTimeNow);
+		}
+
+		return false;
+	}
 
 }
