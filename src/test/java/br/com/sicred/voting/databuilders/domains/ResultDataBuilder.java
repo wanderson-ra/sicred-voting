@@ -6,17 +6,12 @@ import br.com.sicred.voting.domains.enums.Winner;
 
 public class ResultDataBuilder extends DataBuilderBase<Result> {
 
-	private Result result;
 
-	public ResultDataBuilder() {
-		this.result = Result.builder()
+	public Result build() {
+		return  Result.builder()
 				.winner(Winner.NO)
 				.yes(faker.number().randomDigit())
 				.no(faker.number().randomDigit()).build();
-	}
-
-	public Result build() {
-		return this.result;
 
 	}
 

@@ -1,8 +1,6 @@
 package br.com.sicred.voting.databuilders.domains;
 
-
-import static org.springframework.test.util.ReflectionTestUtils.setField;
-
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import br.com.sicred.voting.databuilders.DataBuilderBase;
@@ -11,29 +9,32 @@ import br.com.sicred.voting.domains.Associate;
 
 public class AssociateDataBuilder extends DataBuilderBase<Associate> {
 
-	private Associate associate;
+	private String id;
+	private LocalDateTime createdAt;
+	private LocalDateTime lastUpdate;
 
 	public AssociateDataBuilder() {
-
-		this.associate = Associate.builder()
-				.id(this.faker.internet().uuid())
-				.name(this.faker.name().fullName())
-				.cpf(this.faker.internet().uuid())
-				.createdAt(Utils.convertToLocalDateTime(this.faker.date().past(2, TimeUnit.DAYS)))
-				.lastUpdate(Utils.convertToLocalDateTime(this.faker.date().past(2, TimeUnit.DAYS)))
-				.build();
+		this.id = this.faker.internet().uuid();
+		this.createdAt = Utils.convertToLocalDateTime(this.faker.date().past(2, TimeUnit.DAYS));
+		this.lastUpdate = Utils.convertToLocalDateTime(this.faker.date().past(2, TimeUnit.DAYS));		
 	}
 	
 	public AssociateDataBuilder toCreate() {
-		setField(this.associate, "id", null);
-		setField(this.associate, "createdAt", null);
-		setField(this.associate, "lastUpdate", null);
-		
+		this.id = null;
+		this.createdAt = null;
+		this.lastUpdate = null;
+			
 		return this;
 	}
 
 	public Associate build() {
-		return this.associate;
+		return Associate.builder()
+				.id(id)
+				.name(this.faker.name().fullName())
+				.cpf(this.faker.internet().uuid())
+				.createdAt(createdAt)
+				.lastUpdate(lastUpdate)
+				.build();
 	}
 
 }
