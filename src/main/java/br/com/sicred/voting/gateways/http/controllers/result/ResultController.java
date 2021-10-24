@@ -41,12 +41,11 @@ public class ResultController {
 	@Validated
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("finish/{rulingId}/{votingSessionId}")
-	public GetResultResponseJson getResult(final @PathVariable(name = "rulingId") @NotEmpty String rulingId,
-			final @PathVariable(name = "votingSessionId") @NotEmpty String votingSessionId) {
+	public GetResultResponseJson getResult(final @PathVariable(name = "votingSessionId") @NotEmpty String votingSessionId) {
 
-		log.info("rulingId: {}, votingSessionId: {}", rulingId, votingSessionId);
+		log.info("votingSessionId: {}", votingSessionId);
 		
-		final Result result = this.getResultVotingSessionUseCase.getResult(rulingId, votingSessionId);		
+		final Result result = this.getResultVotingSessionUseCase.getResult(votingSessionId);		
 
 		return GetResultResponseJson.builder()
 				.no(result.getNo())

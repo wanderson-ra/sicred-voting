@@ -20,7 +20,7 @@ import br.com.sicred.voting.utils.BaseTest;
 public class ChekVotingSessionIsOpenUseCaseUniTest extends BaseTest {
 
 	@InjectMocks
-	private ChekVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;
+	private CheckVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;
 
 	@Mock
 	private FindVotingSessionByIdUseCase findVotingSessionByIdUseCase;

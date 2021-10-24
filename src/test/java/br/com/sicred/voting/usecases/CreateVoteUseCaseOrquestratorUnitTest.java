@@ -21,7 +21,7 @@ public class CreateVoteUseCaseOrquestratorUnitTest extends BaseTest {
 	private CreateVoteUseCaseOrquestrator createVoteUseCaseOrquestrator;
 
 	@Mock
-	private ChekVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;
+	private CheckVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;
 
 	@Mock
 	private CheckAssociateAlreadyVotedUseCase checkAssociateAlreadyVotedUseCase;

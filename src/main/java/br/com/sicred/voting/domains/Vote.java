@@ -11,6 +11,7 @@ import com.mongodb.lang.NonNull;
 
 import br.com.sicred.voting.domains.enums.VoteType;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -19,22 +20,23 @@ import lombok.ToString;
 @Builder
 @Document
 public class Vote {
-	
+
 	@Id
 	private String id;
-	
+
 	@NonNull
-	private VoteType voteType;	
+	@EqualsAndHashCode.Include
+	private VoteType voteType;
 
 	@NonNull
 	@DBRef
 	private Associate associate;
-	
+
 	@NonNull
 	@DBRef
 	private VotingSession votingSession;
 
 	@CreatedDate
-	private LocalDateTime createdAt;	
+	private LocalDateTime createdAt;
 
 }

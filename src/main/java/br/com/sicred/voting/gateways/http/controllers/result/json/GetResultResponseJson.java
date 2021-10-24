@@ -1,7 +1,7 @@
 package br.com.sicred.voting.gateways.http.controllers.result.json;
 
 
-import br.com.sicred.voting.domains.enums.VoteType;
+import br.com.sicred.voting.domains.enums.Winner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +17,6 @@ public class GetResultResponseJson {
 
 	private Integer yes;
 	private Integer no;
-	private VoteType winner;
+	private Winner winner;
 
 }

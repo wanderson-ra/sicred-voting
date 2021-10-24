@@ -24,14 +24,13 @@ public class ResultControllerUniTest extends BaseTest{
 	@Test
 	@DisplayName("Should by get result with success")
 	public void ShouldByResultSuccess() {
-		final String rulingId = this.faker.internet().uuid();
 		final String votingSessionId = this.faker.internet().uuid();
 		
 		final Result result = this.domainsDatabuilder.getResultDataBuilder().build();		
 		
-		when(this.getResultVotingSessionUseCase.getResult(rulingId, votingSessionId)).thenReturn(result);
+		when(this.getResultVotingSessionUseCase.getResult(votingSessionId)).thenReturn(result);
 		
-		final GetResultResponseJson responseJson = this.resultController.getResult(rulingId, votingSessionId);
+		final GetResultResponseJson responseJson = this.resultController.getResult(votingSessionId);
 		
 		assertEquals(result.getNo(), responseJson.getNo());
 		assertEquals(result.getYes(), responseJson.getYes());

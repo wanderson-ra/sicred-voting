@@ -2,7 +2,7 @@ package br.com.sicred.voting.databuilders.domains;
 
 import br.com.sicred.voting.databuilders.DataBuilderBase;
 import br.com.sicred.voting.domains.Result;
-import br.com.sicred.voting.domains.enums.VoteType;
+import br.com.sicred.voting.domains.enums.Winner;
 
 public class ResultDataBuilder extends DataBuilderBase<Result> {
 
@@ -10,7 +10,7 @@ public class ResultDataBuilder extends DataBuilderBase<Result> {
 
 	public ResultDataBuilder() {
 		this.result = Result.builder()
-				.winner(VoteType.NO)
+				.winner(Winner.NO)
 				.yes(faker.number().randomDigit())
 				.no(faker.number().randomDigit()).build();
 	}

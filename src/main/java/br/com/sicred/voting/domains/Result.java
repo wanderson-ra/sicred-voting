@@ -1,7 +1,7 @@
 package br.com.sicred.voting.domains;
 
 
-import br.com.sicred.voting.domains.enums.VoteType;
+import br.com.sicred.voting.domains.enums.Winner;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -15,5 +15,5 @@ public class Result {
 	
 	private Integer no;
 	
-	private VoteType winner;
+	private Winner winner;
 }

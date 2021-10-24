@@ -9,11 +9,11 @@ import br.com.sicred.voting.databuilders.Utils;
 import br.com.sicred.voting.domains.Vote;
 import br.com.sicred.voting.domains.enums.VoteType;
 
-public class VolteDataBuilder extends DataBuilderBase<Vote> {
+public class VoteDataBuilder extends DataBuilderBase<Vote> {
 
 	private Vote vote;
 
-	public VolteDataBuilder() {
+	public VoteDataBuilder() {
 
 		this.vote = Vote.builder()
 				.id(this.faker.internet().uuid())
@@ -24,10 +24,16 @@ public class VolteDataBuilder extends DataBuilderBase<Vote> {
 				.build();
 	}
 	
-	public VolteDataBuilder toCreate() {
-		setField(this.vote, "id", null);	;
+	public VoteDataBuilder toCreate() {
+		setField(this.vote, "id", null);
 		setField(this.vote, "createdAt", null);	
 		
+		return this;
+	}
+	
+	public VoteDataBuilder setVoteType(final VoteType voteType) {
+		setField(this.vote, "voteType", voteType);
+				
 		return this;
 	}
 

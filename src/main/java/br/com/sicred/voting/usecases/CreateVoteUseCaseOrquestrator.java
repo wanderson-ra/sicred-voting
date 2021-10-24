@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CreateVoteUseCaseOrquestrator {
 	
 	@Autowired
-	private ChekVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;	
+	private CheckVotingSessionIsOpenUseCase chekVotingSessionIsOpenUseCase;	
 	
 	@Autowired
 	private CheckAssociateAlreadyVotedUseCase checkAssociateAlreadyVotedUseCase;	
