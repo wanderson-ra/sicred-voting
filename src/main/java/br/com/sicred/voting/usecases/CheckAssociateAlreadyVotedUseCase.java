@@ -13,17 +13,19 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class CheckAssociateAlreadyVotedUseCase {
-	
+
 	@Autowired
 	private VoteDatabaseGateway voteDatabaseGateway;
 
-	public void check(final String votingSessionId, final String associateId) {
+	public void check(final String associateId, final String votingSessionId) {
 		log.info("votingSessionId: {}, associateId: {}", votingSessionId, associateId);
-		
-		final Optional<Vote>  optionalVote = this.voteDatabaseGateway.findByAssociateIdAndVotingSessionId(votingSessionId, associateId);
-		
-		if(optionalVote.isPresent()) {
-			log.warn("associate already voted in this session associateId: {}, votingSessionId:{}", associateId, votingSessionId);
+
+		final Optional<Vote> optionalVote = this.voteDatabaseGateway.findByAssociateIdAndVotingSessionId(associateId,
+				votingSessionId);
+
+		if (optionalVote.isPresent()) {
+			log.warn("associate already voted in this session associateId: {}, votingSessionId:{}", associateId,
+					votingSessionId);
 			throw new AssociateAlreadyVotedInThisSessionException();
 		}
 	}

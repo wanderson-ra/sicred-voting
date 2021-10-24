@@ -78,11 +78,11 @@ public class VoteDatabaseGatewayImplUniTest extends BaseTest {
 
 		final Vote voteFinded = this.domainsDatabuilder.getVolteDataBuilder().build();
 
-		when(this.voteRepository.findByAssociateIdAndVotingSessionId(votingSessionId, associateId))
+		when(this.voteRepository.findByAssociateIdAndVotingSessionId(associateId, votingSessionId))
 				.thenReturn(Optional.of(voteFinded));
 
 		final Optional<Vote> optionalVote = this.voteDatabaseGatewayImpl
-				.findByAssociateIdAndVotingSessionId(votingSessionId, associateId);
+				.findByAssociateIdAndVotingSessionId(associateId, votingSessionId);
 
 		assertEquals(voteFinded.getAssociate().getId(), optionalVote.get().getAssociate().getId());
 		assertEquals(voteFinded.getCreatedAt(), optionalVote.get().getCreatedAt());
@@ -98,12 +98,12 @@ public class VoteDatabaseGatewayImplUniTest extends BaseTest {
 		final String votingSessionId = this.faker.internet().uuid();
 		final String associateId = this.faker.internet().uuid();
 
-		doThrow(new RuntimeException()).when(this.voteRepository).findByAssociateIdAndVotingSessionId(votingSessionId,
-				associateId);
+		doThrow(new RuntimeException()).when(this.voteRepository).findByAssociateIdAndVotingSessionId(associateId,
+				votingSessionId);
 
 		final FindVoteBySessionIdAndAssciateIdAssociateDatabaseException error = assertThrows(
 				FindVoteBySessionIdAndAssciateIdAssociateDatabaseException.class, () -> {
-					this.voteDatabaseGatewayImpl.findByAssociateIdAndVotingSessionId(votingSessionId, associateId);
+					this.voteDatabaseGatewayImpl.findByAssociateIdAndVotingSessionId(associateId, votingSessionId);
 				});
 
 		assertEquals(error.getCode(), "sicred.vote.database.error.findbysessionid");

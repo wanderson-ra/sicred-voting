@@ -25,7 +25,7 @@ public class CreateVoteUseCaseOrquestrator {
 		
 		this.chekVotingSessionIsOpenUseCase.check(voteToCreate.getVotingSession().getId());
 		
-		this.checkAssociateAlreadyVotedUseCase.check(voteToCreate.getVotingSession().getId(), voteToCreate.getAssociate().getId());
+		this.checkAssociateAlreadyVotedUseCase.check(voteToCreate.getAssociate().getId(), voteToCreate.getVotingSession().getId());
 		
 		return this.createVoteUseCase.create(voteToCreate);
 	}

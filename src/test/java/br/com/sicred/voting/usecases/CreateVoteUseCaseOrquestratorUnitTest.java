@@ -42,7 +42,7 @@ public class CreateVoteUseCaseOrquestratorUnitTest extends BaseTest {
 		final Vote response = this.createVoteUseCaseOrquestrator.create(voteToCreate);
 
 		verify(this.checkAssociateAlreadyVotedUseCase, VerificationModeFactory.times(1))
-				.check(voteToCreate.getVotingSession().getId(), voteToCreate.getAssociate().getId());
+				.check(voteToCreate.getAssociate().getId(), voteToCreate.getVotingSession().getId());
 
 		verify(this.chekVotingSessionIsOpenUseCase, VerificationModeFactory.times(1))
 				.check(voteToCreate.getVotingSession().getId());

@@ -1,6 +1,7 @@
 package br.com.sicred.voting.gateways.http.controllers.vote.json;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import br.com.sicred.voting.domains.enums.VoteType;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import lombok.ToString;
 @ToString
 public class CreateVoteRequestJson {
 
-	@NotEmpty(message = "Field voteType is required.")
+    @NotNull(message = "Field voteType is required.")
 	private VoteType voteType;
 
 	@NotEmpty(message = "Field associateId is required.")

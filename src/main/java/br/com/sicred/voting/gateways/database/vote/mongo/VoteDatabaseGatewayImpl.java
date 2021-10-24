@@ -33,11 +33,11 @@ public class VoteDatabaseGatewayImpl implements VoteDatabaseGateway {
 	}
 
 	@Override
-	public Optional<Vote> findByAssociateIdAndVotingSessionId(final String votingSessionId, final String associateId) {
+	public Optional<Vote> findByAssociateIdAndVotingSessionId(final String associateId, final String votingSessionId) {
 
 		try {
 
-			return this.voteRepository.findByAssociateIdAndVotingSessionId(votingSessionId, associateId);
+			return this.voteRepository.findByAssociateIdAndVotingSessionId(associateId, votingSessionId);
 
 		} catch (Exception error) {
 			log.error("error: {}", error);
