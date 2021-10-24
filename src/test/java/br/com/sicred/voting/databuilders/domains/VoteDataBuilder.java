@@ -1,7 +1,7 @@
 package br.com.sicred.voting.databuilders.domains;
 
-import static org.springframework.test.util.ReflectionTestUtils.setField;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 import br.com.sicred.voting.databuilders.DataBuilderBase;
@@ -11,34 +11,36 @@ import br.com.sicred.voting.domains.enums.VoteType;
 
 public class VoteDataBuilder extends DataBuilderBase<Vote> {
 
-	private Vote vote;
+	private String id;
+	private VoteType voteType;
+	private LocalDateTime createdAt;
 
 	public VoteDataBuilder() {
-
-		this.vote = Vote.builder()
-				.id(this.faker.internet().uuid())
-				.voteType(VoteType.YES)
-				.associate(new AssociateDataBuilder().build())
-				.votingSession(new VotingSessionDataBuilder().build())
-				.createdAt(Utils.convertToLocalDateTime(this.faker.date().past(1, TimeUnit.DAYS)))
-				.build();
+		this.id = faker.internet().uuid();
+		this.createdAt = Utils.convertToLocalDateTime(this.faker.date().past(1, TimeUnit.DAYS));
+		this.voteType = VoteType.NO;		
 	}
 	
 	public VoteDataBuilder toCreate() {
-		setField(this.vote, "id", null);
-		setField(this.vote, "createdAt", null);	
-		
+		this.id = null;
+		this.createdAt = null;
+				
 		return this;
 	}
 	
 	public VoteDataBuilder setVoteType(final VoteType voteType) {
-		setField(this.vote, "voteType", voteType);
-				
+		this.voteType = voteType;				
 		return this;
 	}
 
 	public Vote build() {
-		return this.vote;
+		return Vote.builder()
+				.id(this.id)
+				.voteType(this.voteType)
+				.associate(new AssociateDataBuilder().build())
+				.votingSession(new VotingSessionDataBuilder().build())
+				.createdAt(this.createdAt)
+				.build();
 	}
 
 }

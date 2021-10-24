@@ -30,7 +30,7 @@ public class CreateVoteUseCaseUnitTest extends BaseTest {
 
 		final Vote voteToCreate = this.domainsDatabuilder.getVolteDataBuilder().toCreate().build();
 
-		final Vote voteCreated = this.domainsDatabuilder.getVolteDataBuilder().toCreate().build();
+		final Vote voteCreated = this.domainsDatabuilder.getVolteDataBuilder().build();
 
 		when(this.voteDatabaseGateway.create(any(Vote.class))).thenReturn(voteCreated);
 

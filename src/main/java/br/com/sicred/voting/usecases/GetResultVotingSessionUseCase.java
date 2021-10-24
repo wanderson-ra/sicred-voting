@@ -35,16 +35,27 @@ public class GetResultVotingSessionUseCase {
 
 		final List<Vote> votesBySession = this.findVotesByVotingSessionUseCase.find(votingSessionId);
 
-		final List<Vote> totalVotesNo = votesBySession.stream().filter(vote -> vote.getVoteType() == VoteType.NO).collect(Collectors.toList());
-		final List<Vote> totalVotesYes = votesBySession.stream().filter(vote -> vote.getVoteType() == VoteType.YES).collect(Collectors.toList());
+		final Integer totalVotesNo = this.getTotalVotes(votesBySession, VoteType.NO);
+		
+		final Integer totalVotesYes = votesBySession.size() - totalVotesNo;
 
-		final Winner winner = totalVotesNo.size() == totalVotesYes.size() ? Winner.TIE
-				: totalVotesNo.size() > totalVotesYes.size()  ? Winner.NO : Winner.YES;
+		final Winner winner = this.getWinner(totalVotesNo, totalVotesYes);				
 
 		return Result.builder()
-				.yes(totalVotesYes.size())
-				.no(totalVotesNo.size())
+				.yes(totalVotesYes)
+				.no(totalVotesNo)
 				.winner(winner).build();
+	}
+
+	private Winner getWinner(final Integer totalVotesNo, final Integer totalVotesYes) {
+		final Winner winner = totalVotesNo == totalVotesYes ? Winner.TIE
+				: totalVotesNo > totalVotesYes  ? Winner.NO : Winner.YES;
+		return winner;
+	}
+
+	private Integer getTotalVotes(final List<Vote> votesBySession, final VoteType voteType) {
+		final Integer totalVotesNo = votesBySession.stream().filter(vote -> vote.getVoteType().equals(voteType)).collect(Collectors.toList()).size();
+		return totalVotesNo;
 	}
 
 	private void checkVotingSessionIsStillOpen(final VotingSession votingSessionFinded) {

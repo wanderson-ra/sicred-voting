@@ -11,7 +11,6 @@ import com.mongodb.lang.NonNull;
 
 import br.com.sicred.voting.domains.enums.VoteType;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -25,7 +24,6 @@ public class Vote {
 	private String id;
 
 	@NonNull
-	@EqualsAndHashCode.Include
 	private VoteType voteType;
 
 	@NonNull

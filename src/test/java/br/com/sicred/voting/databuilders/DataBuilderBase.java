@@ -19,7 +19,7 @@ public abstract class DataBuilderBase<T> {
 
 		List<T> objects = new ArrayList<T>();
 
-		for (int size = 0; size <= lenght; size++) {
+		for (int size = 1; size <= lenght; size++) {
 			objects.add(this.build());
 
 		}
