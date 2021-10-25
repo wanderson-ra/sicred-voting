@@ -8,5 +8,6 @@ public interface AssociateDatebaseGateway {
 	
 	Associate create(final Associate associateToCreate);
 	Optional<Associate> findByCpf(final String cpf);
+	Optional<Associate> findById(final String id);
 
 }
