@@ -6,7 +6,7 @@ spring:
     name: sicred-voting
   data:
      mongodb:
-        uri: mongodb://localhost:27017/SicredVoting?serverSelectionTimeoutMS=1000&connectTimeoutMS=1000   
+        uri: mongodb+srv://sicred:648273@cluster0.rualc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority   
         
 mongodb.encrypt:
   keys:
