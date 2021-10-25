@@ -6,13 +6,13 @@ spring:
     name: sicred-voting
   data:
      mongodb:
-        uri: mongodb://localhost:27017/SicredVoting?serverSelectionTimeoutMS=1000&connectTimeoutMS=1000   
+        uri: mongodb://api-database:27018/SicredVoting?serverSelectionTimeoutMS=1000&connectTimeoutMS=1000   
         
 baseurl:
       v1: sicred/voting/v1
 
 server:
-  port: 8000 
+  port: 8080
    
 
     

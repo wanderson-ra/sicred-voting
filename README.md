@@ -5,7 +5,7 @@
 ## Informações Técnicas
 * O sistema foi criado usando **Java** (openjdk versão **"11.0.8" 2020-07-14**).
 * **Spring Boot** foi usado
-* **Mongo DB** foi usado (instância do mongo atlas para facilitar os testes sem ter a ncessidade de subir instância local).
+* **Mongo DB** foi usado
 * **Feign Client** foi usado
 * **Spring Data Mongo DB** foi usado
 * O sistema foi desenvolvido com **[TDD](https://pt.wikipedia.org/wiki/Test_Driven_Development)**
@@ -25,15 +25,35 @@ maven:
  mvn clean install
 ```
 
-#### Executar projeto local via linha de comando (Na pasta raiz) com instância do mongo atlas (necessita maven instalado)
+## Modos de Execução
 
-porta default: 8080
-</br>
-</br>
+
+#### 1 - Executar projeto local via linha de comando com docker-compose (Na pasta raiz, necessita docker e docker-compose instalados)
+
+Porta default: 8080
+
+Passo 1:
+
+```
+docker-compose build
+```
+
+Passo 2:
+
+```
+docker-compose up 
+```
+
+
+#### 2 - Executar projeto local via linha de comando (Na pasta raiz, necessita maven instalado e instância do mongo rodando)
+
+Porta default: 8000
+
+
 maven:
 
 ```
-mvn spring-boot:run
+mvn spring-boot:run -Dspring.profiles.active=local
 ```
 
 

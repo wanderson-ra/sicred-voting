@@ -4,15 +4,8 @@ spring:
                 enabled: true
   application:
     name: sicred-voting
-  data:
-     mongodb:
-        uri: mongodb+srv://sicred:648273@cluster0.rualc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority   
-        
-mongodb.encrypt:
-  keys:
-    - version: 1
-      key: hqHKBLV83LpCqzKpf8OvutbCs+O5wX5BPu3btWpEvXA=
 
+        
 baseurl:
       v1: sicred/voting/v1  
  
