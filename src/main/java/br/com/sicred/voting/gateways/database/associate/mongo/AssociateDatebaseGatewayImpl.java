@@ -10,6 +10,7 @@ import br.com.sicred.voting.gateways.database.associate.AssociateDatebaseGateway
 import br.com.sicred.voting.gateways.database.associate.mongo.repository.AssociateRespository;
 import br.com.sicred.voting.gateways.exceptions.CreateAssociateDatabaseException;
 import br.com.sicred.voting.gateways.exceptions.FindAssociateByCpfDatabaseException;
+import br.com.sicred.voting.gateways.exceptions.FindAssociateByIdDatabaseException;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
@@ -34,16 +35,27 @@ public class AssociateDatebaseGatewayImpl implements AssociateDatebaseGateway {
 
 	}
 
-
 	public Optional<Associate> findByCpf(final String cpf) {
 		log.info("cpf: {}", cpf);
-		
+
 		try {
 			return this.associateRespository.findByCpf(cpf);
-			
+
 		} catch (Exception error) {
 			log.error("error: {}", error);
 			throw new FindAssociateByCpfDatabaseException();
+		}
+	}
+
+	public Optional<Associate> findById(String id) {
+		log.info("id: {}", id);
+		try {
+
+			return this.associateRespository.findById(id);
+
+		} catch (Exception error) {
+			log.error("error: {}", error);
+			throw new FindAssociateByIdDatabaseException();
 		}
 	}
 

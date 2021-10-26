@@ -21,6 +21,7 @@ import br.com.sicred.voting.domains.Associate;
 import br.com.sicred.voting.gateways.database.associate.mongo.repository.AssociateRespository;
 import br.com.sicred.voting.gateways.exceptions.CreateAssociateDatabaseException;
 import br.com.sicred.voting.gateways.exceptions.FindAssociateByCpfDatabaseException;
+import br.com.sicred.voting.gateways.exceptions.FindAssociateByIdDatabaseException;
 import br.com.sicred.voting.utils.BaseTest;
 
 public class AssociateDatebaseGatewayImplUnitTest extends BaseTest {
@@ -102,6 +103,42 @@ public class AssociateDatebaseGatewayImplUnitTest extends BaseTest {
 
 		assertEquals(error.getCode(), "sicred.associate.database.error.findbycpf");
 		assertEquals(error.getMessage(), "Error to find associate by cpf.");
+	}
+	
+	
+	@Test
+	@DisplayName("Should by find by id success")
+	public void shouldByIdWithSuccess() {
+
+		final Associate associateFinded = this.domainsDatabuilder.getAssociateDataBuilder().build();
+
+		final String id = this.faker.internet().uuid();
+
+		when(this.associateRespository.findById(id)).thenReturn(Optional.of(associateFinded));
+
+		final Optional<Associate> associateFindedResponse = this.associateDatebaseGatewayImpl.findById(id);
+
+		assertEquals(associateFinded.getCpf(), associateFindedResponse.get().getCpf());
+		assertEquals(associateFinded.getCreatedAt(), associateFindedResponse.get().getCreatedAt());
+		assertEquals(associateFinded.getId(), associateFindedResponse.get().getId());
+		assertEquals(associateFinded.getLastUpdate(), associateFindedResponse.get().getLastUpdate());
+		assertEquals(associateFinded.getName(), associateFindedResponse.get().getName());
+	}
+	
+	@Test
+	@DisplayName("Should by find by id error database")
+	public void shouldByIdWithErrorDatabase() {
+
+		final String id = this.faker.internet().uuid();
+
+		doThrow(new RuntimeException()).when(this.associateRespository).findById(id);
+		
+		final FindAssociateByIdDatabaseException error = assertThrows(FindAssociateByIdDatabaseException.class, () -> {
+			this.associateDatebaseGatewayImpl.findById(id);
+		});
+
+		assertEquals(error.getCode(), "sicred.associate.database.error.findbyid");
+		assertEquals(error.getMessage(), "Error to find associate by id.");
 	}
 
 	private void assertCaptured(final Associate associateToCreate, final Associate associateCaptured) {

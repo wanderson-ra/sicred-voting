@@ -23,6 +23,7 @@ public class FindAssociateByIdUseCase {
 		final Optional<Associate> associateOptional = this.associateDatebaseGateway.findById(id);
 
 		if (!associateOptional.isPresent()) {
+			log.warn("associate not found for id: {}", id);
 			throw new AssociateNoFoundException();
 		}
 

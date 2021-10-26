@@ -24,11 +24,12 @@ public class CheckIfAssociateEnableToVoteUseCase {
 	public void check(final String id) {
 		log.info("id: {}", id);
 		
-		final Associate  associateOptional = this.findAssociateByIdUseCase.find(id);		
+		final Associate  associateFinded = this.findAssociateByIdUseCase.find(id);		
 		
-		final VoteCheck voteCheck = this.cpfValidatorGateway.validateCpfToEnableToVote(associateOptional.getCpf());
+		final VoteCheck voteCheck = this.cpfValidatorGateway.validateCpfToEnableToVote(associateFinded.getCpf());
 		
 		if(voteCheck.equals(VoteCheck.DISABLE)) {
+			log.warn("associate disabled to vote:{}", associateFinded);
 			throw new AssociateDisableToVoteException();
 		}
 	}
