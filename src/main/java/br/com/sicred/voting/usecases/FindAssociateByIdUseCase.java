@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.sicred.voting.domains.Associate;
 import br.com.sicred.voting.gateways.database.associate.AssociateDatebaseGateway;
+import br.com.sicred.voting.usecases.exceptions.AssociateNoFoundException;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -16,10 +17,16 @@ public class FindAssociateByIdUseCase {
 	@Autowired
 	private AssociateDatebaseGateway associateDatebaseGateway;
 
-	public Optional<Associate> find(final String id) {
+	public Associate find(final String id) {
 		log.info("id: {}", id);
 
-		return this.associateDatebaseGateway.findById(id);
+		final Optional<Associate> associateOptional = this.associateDatebaseGateway.findById(id);
+
+		if (!associateOptional.isPresent()) {
+			throw new AssociateNoFoundException();
+		}
+
+		return associateOptional.get();
 	}
 
 }
