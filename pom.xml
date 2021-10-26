@@ -18,13 +18,18 @@
 				<version>2.4.5</version>
 				<type>pom</type>
 				<scope>import</scope>
-			</dependency>			
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- APPLICATION - START -->		
-
+		<!-- APPLICATION - START -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -56,7 +61,7 @@
 			<groupId>com.bol</groupId>
 			<artifactId>spring-data-mongodb-encrypt</artifactId>
 			<version>2.4.4</version>
-		</dependency>	
+		</dependency>
 
 		<!-- APPLICATION - END -->
 
@@ -103,7 +108,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- TEST - END -->
-		
+
 	</dependencies>
 
 

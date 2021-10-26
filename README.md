@@ -11,10 +11,12 @@
 * O sistema foi desenvolvido com **[TDD](https://pt.wikipedia.org/wiki/Test_Driven_Development)**
 * O sistema foi desenvolvido usando **[Clean Architecture](https://stackoverflow.com/tags/clean-architecture/info)**
 * O sistema usa **[Lombok](https://projectlombok.org/)**. Para o desenvolvimento é necessário instalar o plug-in no IDE (caso contrário, haverá erros de compilação).
-* O projeto está disponível na plataforma (Front End) **[Heroku](https://challenge-acc-webapp.herokuapp.com/)**.
 * **Swagger** Foi usado para documentar a API. Para acessar, use o endereço: https://challenger-acc.herokuapp.com/swagger-ui.html
 * Mais de 80% de cobertura de testes de unidade.
 
+## Ferramentas Usadas nos Testes
+* Mockito
+* Faker
 
 
 #### Instalar dependências e executar testes (necessita maven instalado)
@@ -32,6 +34,8 @@ maven:
 
 Porta default: 8080
 
+Swagger: http://localhost:8080/swagger-ui.html
+
 Passo 1:
 
 ```
@@ -48,6 +52,8 @@ docker-compose up
 #### 2 - Executar projeto local via linha de comando (Na pasta raiz, necessita maven instalado e instância do mongo rodando)
 
 Porta default: 8000
+
+Swagger: http://localhost:8000/swagger-ui.html
 
 
 maven:

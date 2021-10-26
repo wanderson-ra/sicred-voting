@@ -9,3 +9,7 @@ spring:
 baseurl:
       v1: sicred/voting/v1  
  
+feign:
+    cpfValidator:
+            url: https://user-info.herokuapp.com/
+            name: users

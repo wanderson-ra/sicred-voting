@@ -13,6 +13,11 @@ baseurl:
 
 server:
   port: 8000 
+
+feign:
+    cpfValidator:
+            url: https://user-info.herokuapp.com/
+            name: users
    
 
     
