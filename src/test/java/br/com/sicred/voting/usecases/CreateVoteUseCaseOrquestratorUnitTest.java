@@ -28,6 +28,9 @@ public class CreateVoteUseCaseOrquestratorUnitTest extends BaseTest {
 
 	@Mock
 	private CreateVoteUseCase createVoteUseCase;
+	
+	@Mock
+	private CheckIfAssociateEnableToVoteUseCase checkIfAssociateEnableToVoteUseCase;
 
 	@Test
 	@DisplayName("should by create vote with success")
@@ -40,6 +43,9 @@ public class CreateVoteUseCaseOrquestratorUnitTest extends BaseTest {
 		when(this.createVoteUseCase.create(any(Vote.class))).thenReturn(voteCreated);
 
 		final Vote response = this.createVoteUseCaseOrquestrator.create(voteToCreate);
+		
+		verify(this.checkIfAssociateEnableToVoteUseCase, VerificationModeFactory.times(1))
+		.check(voteToCreate.getAssociate().getId());
 
 		verify(this.checkAssociateAlreadyVotedUseCase, VerificationModeFactory.times(1))
 				.check(voteToCreate.getAssociate().getId(), voteToCreate.getVotingSession().getId());

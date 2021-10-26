@@ -19,9 +19,14 @@ public class CreateVoteUseCaseOrquestrator {
 	@Autowired
 	private CreateVoteUseCase createVoteUseCase;
 	
+	@Autowired
+	private CheckIfAssociateEnableToVoteUseCase checkIfAssociateEnableToVoteUseCase;
+	
 
 	public Vote create(final Vote voteToCreate) {
 		log.info("voteToCreate: {}", voteToCreate);
+		
+		this.checkIfAssociateEnableToVoteUseCase.check(voteToCreate.getAssociate().getId());
 		
 		this.chekVotingSessionIsOpenUseCase.check(voteToCreate.getVotingSession().getId());
 		
