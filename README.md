@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/wanderson-ra/sicred-voting/tree/main.svg?style=svg)](https://circleci.com/gh/wanderson-ra/sicred-voting/tree/main)
+
 # Sicred Voting
 
 
