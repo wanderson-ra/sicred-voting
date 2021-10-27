@@ -9,14 +9,6 @@ orbs:
   maven: circleci/maven@1.0.0
   heroku: circleci/heroku@1.2.6
 
-jobs:
-  sonar:
-    docker:
-      - image: 'node:latest'
-    steps:
-      - checkout
-      - sonarcloud/scan
-
 workflows:
   build_deploy:
     jobs:
